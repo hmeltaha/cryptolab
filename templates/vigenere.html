@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h2>Vigenère Cipher Lab</h2>
+    <p>The Vigenère cipher uses a keyword to shift letters, making it much harder to break than Caesar.</p>
+    
+    <form method="POST">
+        <textarea name="text" placeholder="Enter message..." required></textarea>
+        <input type="text" name="key" placeholder="Enter Keyword (e.g., SECRET)" required style="text-transform: uppercase;">
+        
+        <select name="action">
+            <option value="encrypt">Encrypt</option>
+            <option value="decrypt">Decrypt</option>
+        </select>
+        
+        <button type="submit" class="btn-neon">Execute Cipher</button>
+    </form>
+
+    {% if result %}
+    <div class="result-box" style="margin-top: 20px; border-left: 3px solid var(--neon-green); padding-left: 15px;">
+        <h3>Result:</h3>
+        <p class="neon-text" style="word-wrap: break-word; font-family: monospace;">{{ result }}</p>
+    </div>
+
+    <div class="analysis-section" style="margin-top: 40px;">
+        <h3>Cryptanalysis: Frequency Analysis</h3>
+        <p>Even though the text is encrypted, certain letters appear more often than others. This chart helps "hackers" identify the patterns.</p>
+        
+        <div class="chart-container" style="background: #fff; padding: 10px; border-radius: 8px;">
+            <img src="{{ url_for('static', filename='images/' + chart) }}" alt="Frequency Chart" style="width: 100%;">
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

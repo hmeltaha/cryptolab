@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h1>{{ info.title }}</h1>
+    <p><strong>Students:</strong> {{ info.students }}</p>
+    <p><strong>Instructor:</strong> {{ info.instructor }}</p>
+    <hr>
+    <h3>Project Definition</h3>
+    <p>This project demonstrates how classical encryption works and how it can be broken using Python-based tools.</p>
+</div>
+{% endblock %}

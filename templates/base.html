@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CryptoLab - Hala, Sara, Ehdaa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="logo"><strong>ShieldCrypt</strong> Lab</div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/caesar">Caesar Lab</a></li>
+            <li><a href="/vigenere">Vigenère Lab</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+<footer style="margin-top: 50px; padding: 20px; border-top: 1px solid #333; text-align: center; color: #888;">
+    <p>© 2024 Classical Cipher Learning Project</p>
+    <p>Developed by: <strong>Hala Meltaha, Sara Samir, & Ehdaa Alajarma</strong></p>
+    <p>Instructor: <strong>Dr. Muhannad Tahboush</strong></p>
+</footer>
+</html>

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h2>Caesar Cipher Lab</h2>
+    <form method="POST">
+        <textarea name="text" placeholder="Enter message..." required></textarea>
+        <input type="number" name="shift" placeholder="Shift (1-25) - Leave blank to Brute Force">
+        <select name="action">
+            <option value="encrypt">Encrypt</option>
+            <option value="decrypt">Decrypt</option>
+        </select>
+        <button type="submit" class="btn-neon">Run Cipher</button>
+    </form>
+
+    {% if result %}
+    <div class="result-box">
+        <h3>Result:</h3>
+        <p class="neon-text">{{ result }}</p>
+    </div>
+    {% endif %}
+
+    {% if attempts %}
+    <h3>Brute Force Results (Hacking Demo)</h3>
+    <div class="scroll-table">
+        <table>
+            <tr><th>Shift</th><th>Message</th></tr>
+            {% for item in attempts %}
+            <tr><td>{{ item.shift }}</td><td>{{ item.text }}</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
