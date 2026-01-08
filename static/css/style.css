@@ -155,3 +155,40 @@ textarea { min-height: 120px; resize: vertical; }
     border-left: 5px solid var(--primary);
     margin-top: 25px;
 }
+
+/* Frequency Analysis */
+.freq-layout {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.freq-table-wrapper {
+    flex: 1 1 260px;
+    overflow-x: auto;
+}
+
+.freq-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.freq-table th,
+.freq-table td {
+    border: 1px solid var(--border);
+    padding: 8px 10px;
+    text-align: left;
+}
+
+.freq-table th {
+    background: #f8fafc;
+    font-weight: 700;
+}
+
+.chart-container img {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+}

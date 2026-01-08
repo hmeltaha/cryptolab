@@ -17,6 +17,34 @@
         <h3>Result:</h3>
         <p class="neon-text">{{ result }}</p>
     </div>
+
+    <div class="analysis-section" style="margin-top: 30px;">
+        <h3>Cryptanalysis: Frequency Analysis</h3>
+        <p>Caesar shifts preserve letter patterns. This breakdown highlights which letters dominate after encryption/decryption.</p>
+
+        {% if freq_stats %}
+        <div class="freq-layout">
+            <div class="freq-table-wrapper">
+                <table class="freq-table">
+                    <tr><th>Letter</th><th>Count</th><th>%</th></tr>
+                    {% for row in freq_stats %}
+                    <tr>
+                        <td>{{ row.letter }}</td>
+                        <td>{{ row.count }}</td>
+                        <td>{{ row.percent }}%</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if chart %}
+        <div class="chart-container" style="background: #fff; padding: 10px; border-radius: 8px; margin-top: 15px;">
+            <img src="{{ url_for('static', filename='images/' + chart) }}" alt="Frequency Chart">
+        </div>
+        {% endif %}
+    </div>
     {% endif %}
 
     {% if attempts %}

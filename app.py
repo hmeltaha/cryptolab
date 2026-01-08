@@ -17,6 +17,8 @@ def index():
 def caesar():
     result = ""
     attempts = [] # For the "Hacking" demo
+    chart_url = ""
+    freq_stats = []
     if request.method == 'POST':
         text = request.form.get('text')
         
@@ -25,6 +27,8 @@ def caesar():
             shift = int(request.form.get('shift'))
             action = request.form.get('action')
             result = logic.caesar_cipher(text, shift, mode=action)
+            freq_stats = logic.frequency_analysis(result)
+            chart_url = logic.generate_freq_chart(result)
         else:
             # Brute Force Attack: Try all 26 shifts
             for i in range(26):
@@ -33,12 +37,13 @@ def caesar():
                     "text": logic.caesar_cipher(text, i, mode='decrypt')
                 })
                 
-    return render_template('caesar.html', result=result, attempts=attempts)
+    return render_template('caesar.html', result=result, attempts=attempts, chart=chart_url, freq_stats=freq_stats)
 
 @app.route('/vigenere', methods=['GET', 'POST'])
 def vigenere():
     result = ""
     chart_url = ""
+    freq_stats = []
     if request.method == 'POST':
         # These MUST match the 'name' attributes in your HTML
         text = request.form.get('text')
@@ -47,9 +52,15 @@ def vigenere():
         
         if text and key:
             import logic # Ensure logic is imported
-            result = logic.vigenere_cipher(text, key, mode=action)
-            chart_url = logic.generate_freq_chart(result)
+            try:
+                result = logic.vigenere_cipher(text, key, mode=action)
+                freq_stats = logic.frequency_analysis(result)
+                chart_url = logic.generate_freq_chart(result)
+            except ValueError as exc:
+                result = str(exc)
+                chart_url = ""
+                freq_stats = []
             
-    return render_template('vigenere.html', result=result, chart=chart_url)
+    return render_template('vigenere.html', result=result, chart=chart_url, freq_stats=freq_stats)
 if __name__ == '__main__':
     app.run(debug=True)

@@ -13,7 +13,7 @@
             <option value="decrypt">Decrypt</option>
         </select>
         
-        <button type="submit" class="btn-neon">Execute Cipher</button>
+        <button type="submit" class="btn-neon">Execute Vigenère</button>
     </form>
 
     {% if result %}
@@ -22,14 +22,33 @@
         <p class="neon-text" style="word-wrap: break-word; font-family: monospace;">{{ result }}</p>
     </div>
 
-    <div class="analysis-section" style="margin-top: 40px;">
-        <h3>Cryptanalysis: Frequency Analysis</h3>
-        <p>Even though the text is encrypted, certain letters appear more often than others. This chart helps "hackers" identify the patterns.</p>
+        <div class="analysis-section" style="margin-top: 40px;">
+            <h3>Cryptanalysis: Frequency Analysis</h3>
+            <p>Even though the text is encrypted, certain letters appear more often than others. This helps "hackers" spot language patterns.</p>
+
+            {% if freq_stats %}
+            <div class="freq-layout">
+                <div class="freq-table-wrapper">
+                    <table class="freq-table">
+                        <tr><th>Letter</th><th>Count</th><th>%</th></tr>
+                        {% for row in freq_stats %}
+                        <tr>
+                            <td>{{ row.letter }}</td>
+                            <td>{{ row.count }}</td>
+                            <td>{{ row.percent }}%</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            {% endif %}
         
-        <div class="chart-container" style="background: #fff; padding: 10px; border-radius: 8px;">
-            <img src="{{ url_for('static', filename='images/' + chart) }}" alt="Frequency Chart" style="width: 100%;">
+            {% if chart %}
+            <div class="chart-container" style="background: #fff; padding: 10px; border-radius: 8px;">
+                <img src="{{ url_for('static', filename='images/' + chart) }}" alt="Frequency Chart" style="width: 100%;">
+            </div>
+            {% endif %}
         </div>
-    </div>
     {% endif %}
 </div>
 {% endblock %}
